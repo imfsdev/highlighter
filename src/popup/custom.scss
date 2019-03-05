@@ -1,0 +1,10 @@
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+.icon-button {
+  cursor: pointer;
+}
+
+.actions {
+  white-space: nowrap;
+}
