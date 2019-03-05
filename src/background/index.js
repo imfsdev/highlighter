@@ -16,10 +16,14 @@ function injectStyles() {
         ${s.selector}.ext_selected {
           background: ${s.highlightBgColor};
           color: ${s.highlightColor};
+          font-size: ${s.fontSize};
+          padding: ${s.padding};
         }
         ${s.selector} {
           background: ${s.defaultBgColor};
           color: ${s.defaultColor};
+          font-size: ${s.fontSize};
+          padding: ${s.padding};
         }
       `).join('\n');
 

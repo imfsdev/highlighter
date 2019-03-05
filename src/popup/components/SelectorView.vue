@@ -9,6 +9,23 @@
       />
     </b-form-group>
     <hr />
+    <b-form-group label="Font Size" label-for="fontSizeInput">
+      <b-form-input
+        id="fontSizeInput"
+        type="text"
+        v-model="fontSize"
+        required
+      />
+    </b-form-group>
+    <b-form-group label="Padding" label-for="paddingInput">
+      <b-form-input
+        id="paddingInput"
+        type="text"
+        v-model="padding"
+        required
+      />
+    </b-form-group>
+    <hr />
     <b-form-group label="Default Background Color" label-for="dbgInput">
       <b-form-input
         id="dbgInput"
@@ -69,16 +86,16 @@ export default {
       return {
         backgroundColor: this.defaultBgColor || 'transparent',
         color: this.defaultColor || '#000',
-        padding: '8px',
-        fontSize: '20px'
+        padding: this.padding || '0px',
+        fontSize: this.fontSize || '1em'
       }
     },
     highlightStyle() {
       return {
         backgroundColor: this.highlightBgColor || 'transparent',
         color: this.highlightColor || '#000',
-        padding: '8px',
-        fontSize: '20px'
+        padding: this.padding || '0px',
+        fontSize: this.fontSize || '1em'
       }
     }
   },
@@ -89,6 +106,8 @@ export default {
       defaultColor: '',
       highlightBgColor: '',
       highlightColor: '',
+      padding: '',
+      fontSize: '',
       new: false
     }
   },
@@ -102,6 +121,8 @@ export default {
     this.defaultColor = this.details.defaultColor
     this.highlightBgColor = this.details.highlightBgColor
     this.highlightColor = this.details.highlightColor
+    this.padding = this.details.padding
+    this.fontSize = this.details.fontSize
   },
   methods: {
     ...mapMutations(['changeView']),
@@ -118,6 +139,8 @@ export default {
           defaultColor: this.defaultColor,
           highlightBgColor: this.highlightBgColor,
           highlightColor: this.highlightColor,
+          fontSize: this.fontSize,
+          padding: this.padding,
           hList: this.details.hList || []
         })
       } else {
@@ -127,6 +150,8 @@ export default {
           defaultColor: this.defaultColor,
           highlightBgColor: this.highlightBgColor,
           highlightColor: this.highlightColor,
+          fontSize: this.fontSize,
+          padding: this.padding,
           hList: this.details.hList || []
         })
       }
