@@ -22,7 +22,7 @@ function injectStyles() {
         ${s.selector} {
           background: ${s.defaultBgColor};
           color: ${s.defaultColor};
-          font-size: ${s.fontSize};
+          font-size: ${s.fontSize || '1em'};
           padding: ${s.padding};
         }
       `).join('\n');
@@ -44,17 +44,19 @@ function injectStyles() {
           style.innerHTML = \`${styles}\`;
           document.getElementsByTagName('head')[0].appendChild(style);
 
-          var y2hList = ${JSON.stringify(selectors)};
-          y2hList.forEach(s => {
-            var elements = document.querySelectorAll(s.selector);
-            elements.forEach(el => {
-              if(s.hList.indexOf(el.innerText.toLowerCase()) >= 0) {
-                el.classList.add('ext_selected');
-              } else {
-                el.classList.remove('ext_selected');
-              }
+          setTimeout(() => {
+            var y2hList = ${JSON.stringify(selectors)};
+            y2hList.forEach(s => {
+              var elements = document.querySelectorAll(s.selector);
+              elements.forEach(el => {
+                if(s.hList.indexOf(el.innerText.toLowerCase()) >= 0) {
+                  el.classList.add('ext_selected');
+                } else {
+                  el.classList.remove('ext_selected');
+                }
+              });
             });
-          });
+          }, ${url.delay || 100})
         })();
       `
 

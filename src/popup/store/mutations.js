@@ -6,14 +6,15 @@ export function selectUrl(state, id) {
   state.selectedId = id
 }
 
-export function addUrl(state, url) {
+export function addUrl(state, {url, delay}) {
   if (state.urls.indexOf(url) < 0) {
-    state.urls.push({ url, selectors: [] })
+    state.urls.push({ url, delay, selectors: [] })
   }
 }
 
-export function updateUrl(state, url) {
+export function updateUrl(state, {url, delay}) {
   state.urls[state.selectedId].url = url
+  state.urls[state.selectedId].delay = delay
 }
 
 export function deleteUrl(state, i) {

@@ -5,7 +5,7 @@
       @click="showInputField()"
       v-if="!editMode"
     >
-      <font-awesome-icon icon="plus" /> Add
+      <font-awesome-icon icon="plus" /> Add Value
     </b-button>
     <b-button
       variant="outline-secondary"

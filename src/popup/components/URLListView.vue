@@ -14,7 +14,7 @@
       variant="outline-primary"
       @click="changeView('new')"
     >
-      <font-awesome-icon icon="plus" /> Add
+      <font-awesome-icon icon="plus" /> Add URL
     </b-button>
     <b-button
       variant="outline-primary"

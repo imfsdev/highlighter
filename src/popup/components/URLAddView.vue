@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Add url</h3>
+    <h3>{{ title }}</h3>
     <b-form>
       <b-form-group label="URL" label-for="urlInput">
         <b-form-input
@@ -9,6 +9,14 @@
           v-model="url"
           required
           placeholder="https://www.google.com"
+        />
+      </b-form-group>
+      <b-form-group label="Delay(ms)" label-for="delayInput">
+        <b-form-input
+          id="delayInput"
+          type="text"
+          v-model="delay"
+          required
         />
       </b-form-group>
       <b-button
@@ -21,7 +29,7 @@
       <b-button
         variant="outline-secondary"
         size="small"
-        @click="changeView('list')"
+        @click="cancel()"
       >
         Cancel
       </b-button>
@@ -32,21 +40,45 @@
 import { mapMutations, mapActions } from 'vuex'
 
 export default {
+  props: {
+    details: Object
+  },
   data() {
     return {
-      url: ''
+      title: 'Add URL',
+      url: '',
+      delay: 100
     }
   },
   methods: {
     ...mapMutations(['changeView']),
-    ...mapActions(['addUrl']),
+    ...mapActions(['addUrl', 'updateUrl']),
     save() {
       if (!this.url) {
         return
       }
 
-      this.addUrl(this.url)
-      this.changeView('list')
+      if (this.details) {
+        this.updateUrl({ url: this.url, delay: this.delay })
+        this.$emit('cancel')
+      } else {
+        this.addUrl({ url: this.url, delay: this.delay })
+        this.changeView('list')
+      }
+    },
+    cancel() {
+      if (this.details) {
+        this.$emit('cancel')
+      } else {
+        this.changeView('list')
+      }
+    },
+  },
+  mounted() {
+    if (this.details) {
+      this.url = this.details.url
+      this.delay = this.details.delay || 100
+      this.title = 'Update URL'
     }
   }
 }

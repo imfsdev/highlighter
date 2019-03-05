@@ -12,13 +12,13 @@ function setBadgeText(state) {
 
 export function addCurrentTab({ commit, state }) {
   chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    commit('addUrl', tabs[0].url)
+    commit('addUrl', {url: tabs[0].url})
     setBadgeText(state)
   })
 }
 
-export function addUrl({ commit, state }, url) {
-  commit('addUrl', url)
+export function addUrl({ commit, state }, payload) {
+  commit('addUrl', payload)
   injectStyles()
   setBadgeText(state)
 }

@@ -1,37 +1,20 @@
 <template>
   <div>
-    <h3>URL</h3>
-    <div class="url-info" v-if="!editMode">
-      <h6>{{ currentUrl.url }}</h6>
-      <font-awesome-icon icon="edit" class="icon-button" @click="editUrl()" />
-    </div>
-    <div class="mb20" v-if="editMode">
-      <b-form-group>
-        <b-form-input
-          id="urlInput"
-          type="text"
-          v-model="url"
-          required
-          placeholder="https://www.google.com"
-        />
-      </b-form-group>
-      <b-button variant="outline-primary" @click="saveUrl()">
-        <font-awesome-icon icon="save" /> Update
-      </b-button>
-      <b-button variant="outline-secondary" @click="cancelEdit()">
-        <font-awesome-icon icon="times" /> Cancel
-      </b-button>
-    </div>
+    <URLAddView :details="currentUrl" @cancel="cancelEdit()" v-if="editMode" />
     <div v-if="!editMode">
+      <h3>URL</h3>
+      <div class="url-info">
+        <h6>{{ currentUrl.url }}</h6>
+        <font-awesome-icon icon="edit" class="icon-button" @click="editUrl()" />
+      </div>
       <h5>Selectors</h5>
       <SelectorsList :list="currentUrl.selectors" />
       <b-button variant="outline-primary" @click="addSelector">
-        <font-awesome-icon icon="plus" /> Add
+        <font-awesome-icon icon="plus" /> Add Selector
       </b-button>
       <b-button
         variant="outline-secondary"
         @click="changeView('list')"
-        v-if="!editMode"
       >
         <font-awesome-icon icon="long-arrow-alt-left" /> Back
       </b-button>
@@ -54,10 +37,12 @@
 <script>
 import { mapMutations, mapGetters, mapState, mapActions } from "vuex"
 import SelectorsList from './SelectorsList.vue'
+import URLAddView from './URLAddView.vue'
 
 export default {
   components: {
-    SelectorsList
+    SelectorsList,
+    URLAddView
   },
   computed: {
     ...mapGetters(['currentUrl']),

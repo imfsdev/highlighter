@@ -4,7 +4,7 @@
     <p>{{ currentUrl.url }}</p>
     <h6>Selector</h6>
     <p>{{ currentSelector.selector }}</p>
-    <h6>Values</h6>
+    <h6>Highlight Values</h6>
     <ol class="urls">
       <li class="url" :key="i" v-for="(v, i) in currentSelector.hList">
         <span>{{i+1}}. {{ v }}</span>
