@@ -21,6 +21,10 @@
   align-items: center;
   justify-content: space-between;
   font-size: 16px;
+
+  > span {
+    word-break: break-all;
+  }
 }
 </style>
 

@@ -27,6 +27,10 @@
   justify-content: space-between;
   font-size: 16px;
 }
+
+p {
+  word-break: break-all;
+}
 </style>
 
 <script>

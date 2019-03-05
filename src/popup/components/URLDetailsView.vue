@@ -46,6 +46,7 @@
 
   h6 {
     margin: 0 20px 0 0;
+    word-break: break-all;
   }
 }
 </style>
