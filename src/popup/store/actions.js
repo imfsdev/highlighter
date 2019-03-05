@@ -1,16 +1,26 @@
-export function addCurrentTab({ commit }) {
-  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    commit('addUrl', tabs[0].url)
-  })
-}
-
 function injectStyles() {
   chrome.runtime.sendMessage({ action: 'injectStyles' })
 }
 
-export function addUrl({ commit }, url) {
+function setBadgeText(state) {
+  if (state.urls.length > 0) {
+    chrome.browserAction.setBadgeText({ text: `${state.urls.length}` });
+  } else {
+    chrome.browserAction.setBadgeText({ text: '' });
+  }
+}
+
+export function addCurrentTab({ commit, state }) {
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+    commit('addUrl', tabs[0].url)
+    setBadgeText(state)
+  })
+}
+
+export function addUrl({ commit, state }, url) {
   commit('addUrl', url)
   injectStyles()
+  setBadgeText(state)
 }
 
 export function updateUrl({commit}, payload) {
@@ -18,9 +28,10 @@ export function updateUrl({commit}, payload) {
   injectStyles()
 }
 
-export function deleteUrl({commit}, payload) {
+export function deleteUrl({commit, state}, payload) {
   commit('deleteUrl', payload)
   injectStyles()
+  setBadgeText(state)
 }
 
 export function addSelector({commit}, payload) {

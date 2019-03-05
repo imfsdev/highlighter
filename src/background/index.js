@@ -67,9 +67,6 @@ chrome.runtime.onMessage.addListener(
       case 'injectStyles':
         injectStyles()
         break
-      case 'getState':
-        sendResponse(localStorage.getItem(request.key))
-        break
     }
   }
 )

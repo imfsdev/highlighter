@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 
 export default {
   data() {
@@ -38,7 +38,8 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['changeView', 'addUrl']),
+    ...mapMutations(['changeView']),
+    ...mapActions(['addUrl']),
     save() {
       if (!this.url) {
         return

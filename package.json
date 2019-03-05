@@ -4,14 +4,15 @@
   "author": "fullstackdevs14 <fullstackdevs@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "watch": "webpack --config build/webpack.config.dev.js --watch"
+    "watch": "webpack --config build/webpack.dev.js --watch",
+    "build": "webpack --config build/webpack.prod.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/vue-fontawesome": "^0.1.5",
     "bootstrap-vue": "^2.0.0-rc.13",
-    "vue": "^2.6.7",
+    "vue": "^2.6.8",
     "vuex": "^3.1.0",
     "vuex-persist": "^2.0.0"
   },
@@ -21,8 +22,9 @@
     "sass-loader": "^7.1.0",
     "vue-loader": "^15.7.0",
     "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.6.7",
+    "vue-template-compiler": "^2.6.8",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "webpack-merge": "^4.2.1"
   }
 }
