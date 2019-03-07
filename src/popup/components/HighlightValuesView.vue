@@ -1,31 +1,29 @@
 <template>
   <div>
-    <h6>URL</h6>
-    <p>{{ currentUrl.url }}</p>
-    <h6>Selector</h6>
-    <p>{{ currentSelector.selector }}</p>
     <h6>Highlight Values</h6>
-    <ol class="urls">
-      <li class="url" :key="i" v-for="(v, i) in currentSelector.hList">
-        <span>{{i+1}}. {{ v }}</span>
-        <font-awesome-icon icon="times" :style="iconStyles" @click="deleteValue(i)"/>
-      </li>
-    </ol>
     <AddValue />
+    <div class="container">
+      <span class="chip" :key="i" v-for="(v, i) in currentSelector.hList">
+        {{ v }}
+        <font-awesome-icon icon="times" :style="iconStyles" @click="deleteValue(i)"/>
+      </span>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>
-.urls {
+.container {
   list-style-type: none;
   padding: 0;
+  margin: 10px -4px 0;
 }
 
-.url {
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.chip {
+  padding: 4px 8px;
+  display: inline-block;
   font-size: 16px;
+  margin: 4px;
+  background: #ddd;
+  border-radius: 4px;
 }
 
 p {

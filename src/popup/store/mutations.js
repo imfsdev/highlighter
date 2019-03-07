@@ -40,7 +40,7 @@ export function deleteSelector(state, i) {
 
 export function addValue(state, v) {
   const currentSelector = state.urls[state.selectedId].selectors[state.selectorId]
-  const v1 = v.toLowerCase()
+  const v1 = v.toLowerCase().trim()
   if (currentSelector.hList.indexOf(v1) < 0) {
     currentSelector.hList.push(v1)
   }

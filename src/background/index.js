@@ -49,7 +49,7 @@ function injectStyles() {
             y2hList.forEach(s => {
               var elements = document.querySelectorAll(s.selector);
               elements.forEach(el => {
-                if(s.hList.indexOf(el.innerText.toLowerCase()) >= 0) {
+                if(s.hList.indexOf(el.innerText.toLowerCase().trim()) >= 0) {
                   el.classList.add('ext_selected');
                 } else {
                   el.classList.remove('ext_selected');
@@ -80,7 +80,6 @@ chrome.runtime.onMessage.addListener(
 chrome.tabs.onActivated.addListener(
   function () {
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-      console.log(tabs)
       if (tabs[0].status === 'complete') {
         injectStyles()
       }
@@ -90,7 +89,6 @@ chrome.tabs.onActivated.addListener(
 
 chrome.tabs.onUpdated.addListener(
   function (tabId, changeInfo, tab) {
-    console.log(changeInfo)
     if (changeInfo.status === 'complete') {
       injectStyles()
     }
