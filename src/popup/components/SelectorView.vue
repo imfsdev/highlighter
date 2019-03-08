@@ -1,13 +1,17 @@
 <template>
   <div>
-    <b-form-group label="Selector" label-for="selectorInput">
-      <b-form-input
-        id="selectorInput"
-        type="text"
-        v-model="selector"
-        required
-      />
-    </b-form-group>
+    <h6>Selectors</h6>
+    <div class="selector-line" :key="i" v-for="(selector, i) in list">
+      <b-form-group>
+        <b-form-input
+          type="text"
+          v-model="list[i]"
+          required
+        />
+      </b-form-group>
+      <font-awesome-icon icon="times" @click="deleteSelector(i)"/>
+    </div>
+    <b-button variant="outline-primary" @click="addSelector()">Add</b-button>
     <hr />
     <b-form-group label="Font Size" label-for="fontSizeInput">
       <b-form-input
@@ -74,6 +78,26 @@
     </b-button>
   </div>
 </template>
+<style lang="scss" scoped>
+.selector-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+
+  .form-group {
+    margin-bottom: 0;
+    flex: 1;
+  }
+
+  .fa-times {
+    color: #555;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 0 0 8px;
+    flex: none;
+  }
+}
+</style>
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
@@ -101,7 +125,7 @@ export default {
   },
   data() {
     return {
-      selector: '',
+      list: [''],
       defaultBgColor: '',
       defaultColor: '',
       highlightBgColor: '',
@@ -116,7 +140,7 @@ export default {
       this.new = true
     }
 
-    this.selector = this.details.selector
+    this.list = this.details.list
     this.defaultBgColor = this.details.defaultBgColor
     this.defaultColor = this.details.defaultColor
     this.highlightBgColor = this.details.highlightBgColor
@@ -128,13 +152,15 @@ export default {
     ...mapMutations(['changeView']),
     ...mapActions(['addSelector', 'updateSelector']),
     save() {
-      if (!this.selector) {
+      if (!this.list || !this.list[0]) {
         return
       }
 
+      this.list = this.list.filter(s => s)
+
       if (this.new) {
         this.addSelector({
-          selector: this.selector,
+          list: this.list,
           defaultBgColor: this.defaultBgColor,
           defaultColor: this.defaultColor,
           highlightBgColor: this.highlightBgColor,
@@ -145,7 +171,7 @@ export default {
         })
       } else {
         this.updateSelector({
-          selector: this.selector,
+          list: this.list,
           defaultBgColor: this.defaultBgColor,
           defaultColor: this.defaultColor,
           highlightBgColor: this.highlightBgColor,
@@ -156,6 +182,12 @@ export default {
         })
       }
       this.changeView('details')
+    },
+    addSelector() {
+      this.list.push('')
+    },
+    deleteSelector(i) {
+      this.list.splice(i, 1)
     }
   }
 }

@@ -13,13 +13,13 @@ function injectStyles() {
     console.log('Inject styles', state, tabs[0].url)
     if (url) {
       const styles = url.selectors.map(s => `
-        ${s.selector}.ext_selected {
+        ${s.list.map(s => s + '.ext_selected').join(',')} {
           background: ${s.highlightBgColor};
           color: ${s.highlightColor};
           font-size: ${s.fontSize};
           padding: ${s.padding};
         }
-        ${s.selector} {
+        ${s.list.join(',')} {
           background: ${s.defaultBgColor};
           color: ${s.defaultColor};
           font-size: ${s.fontSize || '1em'};
@@ -28,7 +28,7 @@ function injectStyles() {
       `).join('\n');
 
       const selectors = url.selectors.map(s => ({
-        selector: s.selector,
+        selectors: s.list,
         hList: s.hList
       }))
 
@@ -47,7 +47,7 @@ function injectStyles() {
           setTimeout(() => {
             var y2hList = ${JSON.stringify(selectors)};
             y2hList.forEach(s => {
-              var elements = document.querySelectorAll(s.selector);
+              var elements = document.querySelectorAll(s.selectors.join(','));
               elements.forEach(el => {
                 if(s.hList.indexOf(el.innerText.toLowerCase().trim()) >= 0) {
                   el.classList.add('ext_selected');

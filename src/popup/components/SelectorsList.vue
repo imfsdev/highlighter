@@ -1,7 +1,7 @@
 <template>
   <ul class="urls">
     <li class="url" :key="i" v-for="(item, i) in list">
-      <span>{{ item.selector }}</span>
+      <span>{{ item.list.join(', ') }}</span>
       <div class="actions">
         <font-awesome-icon icon="cog" :style="iconStyles" @click="showDetails(i)"/>
         <font-awesome-icon icon="list-ul" :style="iconStyles" @click="showList(i)"/>
@@ -59,4 +59,3 @@ export default {
   }
 }
 </script>
-
